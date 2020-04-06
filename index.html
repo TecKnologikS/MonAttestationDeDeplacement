@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-83384938-6"></script>
+		<script>
+			<!-- suivi uniquement sur la page d accueil, ainsi aucune information saisie n est tracee -->
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'XXXXXXXXX');
+		</script>
+		<meta charset="UTF-8">
+		<title>Mon attestation de déplacement</title>
+		<meta name="title" content="Mon Attestation de déplacement">
+		<meta name="description" content="Générateur d'attestation/autorisation de déplacement provisoire, pour une sortie limitée en ces temps de crise"/>
+		<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,400&display=swap" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="index.css" />
+	</head>
+	<body>
+	<div class="autorisation">
+		<div class="header">
+			<h1>Mon attestation de déplacement</h1>
+		</div>
+		<div class="content">
+			<div class="update">Conforme avec l'attestation mobile du 6 avril, fini le papier !</div>
+			<div class="agreement">Le site n'est pas résponsable des fausses déclarations générées .... <br />
+				Aucune inquiétude, le site ne sauvegarde aucune donnée personnelle. <br />
+				Il est conseillé d'imprimer cette attestation, cependant si vous n'avez pas la possibilité n'oubliez pas de l'avoir sur votre smartphone, c'est mieux que rien, et c'est gratuit / écologique que demander de plus <br />
+				Et voici les <a href="https://www.google.fr/search?q=coronavirus+conseils&fbx=dothefive&hl=fr">5 GESTES "BARRIÈRE"</a> conseillé par le gouvernement.<br />
+				<b>Prenez soin de vous</b>
+				<br /><br />
+				Pour éditer un même formulaire mis à jour avec la date du jour, il suffira d'actualiser la page de l'attestation <br />
+
+			</div>
+			<div class="content_nom">
+				<span>Nom : </span>
+				<input id="attestationNom" class="field" type="text" />
+			</div>
+			<div class="content_prenom">
+				<span>Prénom : </span>
+				<input id="attestationPrenom" class="field" type="text" />
+			</div>
+			<div class="content_naissance">
+				<span>Date de naissance : </span>
+				<input id="attestationNaissance" class="field" type="date" />
+			</div>
+			<div class="content_lieunaissance">
+				<span>Lieu de naissance : </span>
+				<input id="attestationLieunaissance" class="field" type="text" />
+			</div>
+			<div class="content_domicile">
+				<span>Adresse (rue, code postal et ville): </span>
+				<textarea class="content_adresse" name="attestationAdresse" id="attestationAdresse" rows="3"></textarea>
+			</div>
+			<div class="content_ville">
+				<span>Ville de déclaration : </span>
+				<input id="attestationVille" class="field" type="text" />
+			</div>
+			<div class="content_heure">
+				<span>Heure (optionnelle) : </span>
+				<div class="content_heure_item">
+					<input id="attestationHeure" class="field" type="text" maxlength="2" />
+					:
+					<input id="attestationMinute" class="field" type="text" maxlength="2" />
+				</div>
+			</div>
+			<div class="content_heure_exp">
+			Si l'heure n'est pas rempli elle sera mise automatiquement sur le moment de la création de l'attestation
+			</div>
+			<div class="content_choix">
+				<span>Choix de la sortie : </span>
+				<div class="content_choix_radio">
+					<div class="item">
+						<input type="radio" id="choix1" name="attestationChoix" value="boulot">
+		  			<label for="choix1">Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle, lorsqu’ils sont indispensables à l’exercice d’activités ne pouvant être organisées sous forme de télétravail ou déplacements professionnels ne pouvant être différés</label>
+					</div>
+					<div class="item">
+						<input type="radio" id="choix2" name="attestationChoix" value="course" checked>
+		  			<label for="choix2">Déplacements pour effectuer des achats de fournitures nécessaires à l’activité professionnelle et des achats de première nécessité dans des établissements dont les activités demeurent autorisées (liste sur  <a href="https://gouvernement.fr" target="_blank">gouvernement.fr</a>)</label>
+					</div>
+					<div class="item">
+						<input type="radio" id="choix3" name="attestationChoix" value="medecin">
+		  			<label for="choix3">Consultations et soins ne pouvant être assurés à distance et ne pouvant être différés ; consultations et soins des patients atteints d'une affection de longue durée</label>
+					</div>
+					<div class="item">
+						<input type="radio" id="choix4" name="attestationChoix" value="garde">
+		  			<label for="choix4">Déplacements pour motif familial impérieux, pour l’assistance aux personnes vulnérables ou la garde d’enfants</label>
+					</div>
+					<div class="item">
+						<input type="radio" id="choix5" name="attestationChoix" value="sport">
+		  			<label for="choix5">Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un kilomètre autour du domicile, liés soit à l'activité physique individuelle des personnes, à l'exclusion de toute pratique sportive collective et de toute proximité avec d'autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie</label>
+					</div>
+					<div class="item" style="display:none">
+						<input type="radio" id="choix6" name="attestationChoix" value="police">
+		  			<label for="choix6">Déplacements résultant d'une obligation de présentation aux services de police ou de gendarmerie nationales ou à tout autre service ou professionnel, imposée par l'autorité de police administrative ou l'autorité judiciaire </label>
+					</div>
+					<div class="item">
+						<input type="radio" id="choix7" name="attestationChoix" value="justice">
+		  			<label for="choix7">Convocation judiciaire ou administrative</label>
+					</div>
+					<div class="item">
+						<input type="radio" id="choix8" name="attestationChoix" value="interet">
+		  			<label for="choix8">Participation à des missions d’intérêt général sur demande de l’autorité administrative</label>
+					</div>
+				</div>
+			</div>
+			<div class="content_signature">
+				<span>Signature : </span>
+			<div class="content_signature_wrapper">
+				<canvas id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+			</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="footer_button" id="button">Obtenir</div>
+		</div>
+		</div>
+		<script src="./index.js"></script>
+	</body>
+</html>

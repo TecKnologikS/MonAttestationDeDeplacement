@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Mon attestation de déplacement provisoire</title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,400,900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="attestation.css" />
+		<script src="./qrcode.min.js"></script>
+	</head>
+	<body>
+	<div class="autorisation">
+		<div class="header">
+			<h1>ATTESTATION DE DÉPLACEMENT DÉROGATOIRE</h1>
+		</div>
+		<div class="content">
+			<div class="agreement">En application de l’article 1er du décret du 16 mars 2020 portant réglementation des
+déplacements dans le cadre de la lutte contre la propagation du virus Covid-19 :
+			</div>
+			<div class="identite">
+				Je soussigné(e) <br /><br />
+				Mme / M. <span id="nom">NOM_ET_PRENOM</span> <br />
+				Né(e) le : <span id="naissance">DATE_NAISSANCE</span> <br />
+				Demeurant : <span id="adresse">ADRESSE</span> <br />
+			</div>
+			<div class="intro_choix">
+				certifie que mon déplacement est lié au motif suivant (cocher la case) autorisé par
+l’article 1er du décret du 16 mars 2020 portant réglementation des déplacements dans
+le cadre de la lutte contre la propagation du virus Covid-19 :
+			</div>
+			<div class="choix"><span id="choix">LE_CHOIX</span></div>
+			<div class="right">
+			<div class="ou_et_quand">
+				Fait à <span id="ville">VILLE</span> le <span id="dateDuJour">DATE_DU_JOUR</span> à <span id="heureDeDebut">HEURE_DE_DEBUT</span>
+			</div>
+			<img id="signature" />
+			</div>
+			<div id="qrcode"></div>
+			</div>
+		</div>
+		<script src="./attestation.js"></script>
+	</body>
+</html>
