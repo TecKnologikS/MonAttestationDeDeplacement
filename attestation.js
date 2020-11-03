@@ -44,6 +44,26 @@ document.getElementById('button').addEventListener('click', function(event) {
    updateHour();
 }, false);
 
+var correspondance = {
+  "boulot": "boulot",
+  "travail": "boulot",
+  "course": "course",
+  "courses": "course",
+  "achat": "course",
+  "achats": "course",
+  "medecin": "medecin",
+  "docteur": "medecin",
+  "garde": "garde",
+  "handicap": "handicap",
+  "sport": "sport",
+  "animal": "sport",
+  "animaux": "sport",
+  "police": "police",
+  "justice": "police",
+  "interet": "interet",
+  "enfants": "enfants",
+};
+
 var choix = {
   "boulot": "Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un établissement d’enseignement ou de formation, déplacements professionnels ne pouvant être différés, déplacements pour un concours ou un examen.",
   "course": "Déplacements pour effectuer des achats de fournitures nécessaires à l'activité professionnelle, des achats de première nécessité dans des établissements dont les activités demeurent autorisées, le retrait de commande et les livraisons à domicile.",
@@ -79,8 +99,13 @@ if(undefined !== getUrlVars()['adresse'])
   document.getElementById('adresse').textContent = unescape(decodeURI(getUrlVars()['adresse']));
 if(undefined !== getUrlVars()['ville'])
   document.getElementById('ville').textContent = unescape(decodeURI(getUrlVars()['ville']));
-if(undefined !== getUrlVars()['choix'])
-  document.getElementById('choix').textContent = unescape(choix[decodeURI(getUrlVars()['choix'])]);
+if(undefined !== getUrlVars()['choix']) {
+  var monChoix = correspondance[decodeURI(getUrlVars()['choix']).toLowerCase()];
+} else {
+  var monChoix = "course";
+}
+
+document.getElementById('choix').textContent = unescape(choix[monChoix]);
 
 document.getElementById('dateDuJour').textContent = day + '/' + month + '/' + year;
 
@@ -104,7 +129,7 @@ textQrCode += "Prenom: " + unescape(decodeURI(getUrlVars()['prenom'])) + ";\n";
 textQrCode += "Naissance: " + unescape(decodeURI(getUrlVars()['naissance'])) + " a " + unescape(decodeURI(getUrlVars()['lieu'])) + ";\n";
 textQrCode += "Adresse: " + unescape(decodeURI(getUrlVars()['adresse'])) + ";\n";
 textQrCode += "Sortie: " + day + '/' + month + '/' + year + " a " + document.getElementById('heureDeDebut').textContent + ";\n";
-textQrCode += "Motifs: " + unescape(motifs[decodeURI(getUrlVars()['choix'])]) + ";";
+textQrCode += "Motifs: " + unescape(motifs[monChoix]) + ";";
 
 new QRCode(document.getElementById("qrcode"), {
 	text: textQrCode,
