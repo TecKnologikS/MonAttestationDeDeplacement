@@ -29,12 +29,15 @@ if(null !== localStorage.getItem('adresse'))
   document.getElementById('attestationAdresse').value = localStorage.getItem('adresse');
 if(null !== localStorage.getItem('heure'))
   document.getElementById('attestationHeure').value = localStorage.getItem('heure');
-if(null !== localStorage.getItem('minute'))
-  document.getElementById('attestationMinute').value = localStorage.getItem('minute');
 
 document.getElementById('button').addEventListener('click', function(event) {
   event.preventDefault();
-   open();
+  open();
+}, false);
+
+document.getElementById('copy').addEventListener('click', function(event) {
+  event.preventDefault();
+  copyLink();
 }, false);
 
 function open() {
@@ -64,12 +67,8 @@ function open() {
   let birthdate = day + '/' + month + '/' + year;
   url += '&naissance=' + encodeURI(birthdate);
   url += '&ville=' + encodeURI(document.getElementById('attestationVille').value);
-  url += '&choix=' + encodeURI(document.querySelector('input[name="attestationChoix"]:checked').value);
   url += '&adresse=' + encodeURI(document.getElementById('attestationAdresse').value);
-  if (document.getElementById('attestationHeure').value)
-    url += '&heure=' + encodeURI(document.getElementById('attestationHeure').value);
-  if (document.getElementById('attestationMinute').value)
-    url += '&minute=' + encodeURI(document.getElementById('attestationMinute').value);
+  url += '&choix=' + encodeURI(document.querySelector('input[name="attestationChoix"]:checked').value);
 
   localStorage.setItem('signature', signaturePad.toDataURL('image/png'));
   localStorage.setItem('nom', document.getElementById('attestationNom').value);
@@ -79,7 +78,60 @@ function open() {
   localStorage.setItem('ville', document.getElementById('attestationVille').value);
   localStorage.setItem('adresse', document.getElementById('attestationAdresse').value);
   localStorage.setItem('heure', document.getElementById('attestationHeure').value);
-  localStorage.setItem('minute', document.getElementById('attestationMinute').value);
 
   window.location.href = url;
+}
+
+function copyLink() {
+  if (!document.getElementById('attestationNom').value)
+    return 0;
+  if (!document.getElementById('attestationPrenom').value)
+    return 0;
+  if (!document.getElementById('attestationLieunaissance').value)
+    return 0;
+  if (!document.getElementById('attestationNaissance').value)
+    return 0;
+  if (!document.getElementById('attestationAdresse').value)
+    return 0;
+  if (!document.querySelector('input[name="attestationChoix"]:checked').value)
+    return 0;
+  if (!document.getElementById('attestationVille').value)
+    return 0;
+
+  var url = 'https://mon-attestation-de-deplacement.fr/attestation.html?';
+  url += 'nom=' + encodeURI(document.getElementById('attestationNom').value);
+  url += '&prenom=' + encodeURI(document.getElementById('attestationPrenom').value);
+  url += '&lieu=' + encodeURI(document.getElementById('attestationLieunaissance').value);
+
+  let birthday = new Date(document.getElementById('attestationNaissance').value);
+  let month = String(birthday.getMonth() + 1).padStart(2, '0');
+  let day = String(birthday.getDate()).padStart(2, '0');
+  let year = birthday.getFullYear();
+  let birthdate = day + '/' + month + '/' + year;
+
+  url += '&naissance=' + encodeURI(birthdate);
+  url += '&ville=' + encodeURI(document.getElementById('attestationVille').value);
+  url += '&adresse=' + encodeURI(document.getElementById('attestationAdresse').value);
+  url += '&choix=' + encodeURI(document.querySelector('input[name="attestationChoix"]:checked').value);
+
+  localStorage.setItem('signature', signaturePad.toDataURL('image/png'));
+  localStorage.setItem('nom', document.getElementById('attestationNom').value);
+  localStorage.setItem('prenom', document.getElementById('attestationPrenom').value);
+  localStorage.setItem('lieu', document.getElementById('attestationLieunaissance').value);
+  localStorage.setItem('naissance', document.getElementById('attestationNaissance').value);
+  localStorage.setItem('ville', document.getElementById('attestationVille').value);
+  localStorage.setItem('adresse', document.getElementById('attestationAdresse').value);
+  localStorage.setItem('heure', document.getElementById('attestationHeure').value);
+
+  var zone = document.getElementById("myAttestationLinkWrap");
+  zone.classList.remove("hide");
+
+  var copyText = document.getElementById("myAttestationLink");
+  copyText.value = url;
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  alert("Le liens a été copié !");
+
+  zone.classList.add("hide");
 }

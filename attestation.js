@@ -68,7 +68,7 @@ var motifs = {
   "enfants": "enfants",
 }
 
-if (undefined === getUrlVars()['prenom'] || undefined === getUrlVars()['prenom'] || undefined !== getUrlVars()['heure'] || undefined !== getUrlVars()['minute'] || null === localStorage.getItem('created_at'))
+if (undefined === getUrlVars()['prenom'] || undefined === getUrlVars()['prenom'] || null === localStorage.getItem('created_at'))
   window.location.href = "/";
 
 if(undefined !== getUrlVars()['nom'] && undefined !== getUrlVars()['prenom'])
@@ -84,7 +84,7 @@ if(undefined !== getUrlVars()['choix'])
 
 document.getElementById('dateDuJour').textContent = day + '/' + month + '/' + year;
 
-if(null !== localStorage.getItem('heure')) {
+if(null !== localStorage.getItem('heure') && localStorage.getItem('heure').length > 0) {
   //si heure dispo
   document.getElementById('heureDeDebut').textContent = localStorage.getItem('heure');
 } else {
@@ -98,7 +98,7 @@ if(null !== localStorage.getItem('signature'))
 
 
 var textQrCode = "";
-textQrCode += "Cree le: " + localStorage.getItem('created_at') + ";\n";
+textQrCode += "Cree le: " + document.getElementById('heureDeDebut').textContent + ";\n";
 textQrCode += "Nom: " + unescape(decodeURI(getUrlVars()['nom'])) + ";\n";
 textQrCode += "Prenom: " + unescape(decodeURI(getUrlVars()['prenom'])) + ";\n";
 textQrCode += "Naissance: " + unescape(decodeURI(getUrlVars()['naissance'])) + " a " + unescape(decodeURI(getUrlVars()['lieu'])) + ";\n";

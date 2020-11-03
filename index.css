@@ -87,7 +87,7 @@
 }
 
 .content_heure input {
-  width: 50px;
+  width: 100px;
 }
 
 .content_heure_item {
@@ -175,6 +175,18 @@ body {
 
 .content_choix_radio .item input {
   margin-right: 24px;
+}
+
+.link.hide {
+  display: none;
+}
+
+.footer_button:not(:first-child) {
+  margin-left: 16px;
+}
+
+.grey {
+  background-color: #9e9e9e;
 }
 
 @media only screen and (max-device-width: 850px) {
