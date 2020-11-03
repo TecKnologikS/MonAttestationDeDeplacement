@@ -45,25 +45,27 @@ document.getElementById('button').addEventListener('click', function(event) {
 }, false);
 
 var choix = {
-  "boulot": "Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle, lorsqu’ils sont indispensables à l’exercice d’activités ne pouvant être organisées sous forme de télétravail ou déplacements professionnels ne pouvant être différés",
-  "course": "Déplacements pour effectuer des achats de fournitures nécessaires à l’activité professionnelle et des achats de première nécessité dans des établissements dont les activités demeurent autorisées (liste sur gouvernement.fr)",
-  "medecin": "Consultations et soins ne pouvant être assurés à distance et ne pouvant être différés ; consultations et soins des patients atteints d'une affection de longue durée",
-  "garde": "Déplacements pour motif familial impérieux, pour l’assistance aux personnes vulnérables ou la garde d’enfants",
-  "sport": "Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un kilomètre autour du domicile, liés soit à l'activité physique individuelle des personnes, à l'exclusion de toute pratique sportive collective et de toute proximité avec d'autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie",
-  "police": "Déplacements résultant d'une obligation de présentation aux services de police ou de gendarmerie nationales ou à tout autre service ou professionnel, imposée par l'autorité de police administrative ou l'autorité judiciaire",
-  "justice": "Convocation judiciaire ou administrative",
+  "boulot": "Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un établissement d’enseignement ou de formation, déplacements professionnels ne pouvant être différés, déplacements pour un concours ou un examen.",
+  "course": "Déplacements pour effectuer des achats de fournitures nécessaires à l'activité professionnelle, des achats de première nécessité dans des établissements dont les activités demeurent autorisées, le retrait de commande et les livraisons à domicile.",
+  "medecin": "Consultations, examens et soins ne pouvant être assurés à distance et l’achat de médicaments.",
+  "garde": "Déplacements pour motif familial impérieux, pour l'assistance aux personnes vulnérables et précaires ou la garde d'enfants.",
+  "sport": "Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un kilomètre autour du domicile, liés soit à l'activité physique individuelle des personnes, à l'exclusion de toute pratique sportive collective et de toute proximité avec d'autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie.",
+  "police": "Convocation judiciaire ou administrative et pour se rendre dans un service public",
   "interet": "Participation à des missions d’intérêt général sur demande de l’autorité administrative",
+  "handicap": "Déplacement des personnes en situation de handicap et leur accompagnant.",
+  "enfants": "Déplacement pour chercher les enfants à l’école et à l’occasion de leurs activités périscolaires"
 };
 
 var motifs = {
   "boulot": "travail",
-  "course": "courses",
+  "course": "achats",
   "medecin": "sante",
   "garde": "famille",
-  "sport": "sport",
-  "police": "judiciaire",
-  "justice": "judiciaire",
+  "handicap": "handicap",
+  "sport": "sport_animaux",
+  "police": "convocation",
   "interet": "missions",
+  "enfants": "enfants",
 }
 
 if (undefined === getUrlVars()['prenom'] || undefined === getUrlVars()['prenom'] || undefined !== getUrlVars()['heure'] || undefined !== getUrlVars()['minute'] || null === localStorage.getItem('created_at'))
@@ -88,7 +90,7 @@ if(null !== localStorage.getItem('heure')) {
 } else {
   //sinon on met
   document.getElementById('heureDeDebut').textContent = String(dateObj.getHours()).padStart(2, '0') + "h" + String(dateObj.getMinutes()).padStart(2, '0');
-  localStorage.setItem('heure', ) = document.getElementById('heureDeDebut').textContent;
+  localStorage.setItem('heure', document.getElementById('heureDeDebut').textContent);
 }
 
 if(null !== localStorage.getItem('signature'))
