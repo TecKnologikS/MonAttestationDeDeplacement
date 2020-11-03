@@ -1,3 +1,10 @@
+let dateObj = new Date();
+let month = String(dateObj.getMonth() + 1).padStart(2, '0');
+let day = String(dateObj.getDate()).padStart(2, '0');
+let year = dateObj.getFullYear();
+
+document.getElementById('newHour').value = String(dateObj.getHours()).padStart(2, '0') + ":" + String(dateObj.getMinutes()).padStart(2, '0');
+
 function getUrlVars() {
   var vars = {};
   var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -21,6 +28,22 @@ function getCookie(cname) {
   return "";
 }
 
+function updateHour() {
+  if("" !== document.getElementById('newHour').value)
+    localStorage.setItem('heure', document.getElementById('newHour').value.replace(':', 'h'));
+  else
+    localStorage.setItem('heure', String(dateObj.getHours()).padStart(2, '0') + "h" + String(dateObj.getMinutes()).padStart(2, '0'));
+
+  localStorage.setItem('created_at', day + '/' + month + '/' + year + " a " + String(dateObj.getHours()).padStart(2, '0') + "h" + String(dateObj.getMinutes()).padStart(2, '0'));
+
+  location.reload();
+}
+
+document.getElementById('button').addEventListener('click', function(event) {
+  event.preventDefault();
+   updateHour();
+}, false);
+
 var choix = {
   "boulot": "Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle, lorsqu’ils sont indispensables à l’exercice d’activités ne pouvant être organisées sous forme de télétravail ou déplacements professionnels ne pouvant être différés",
   "course": "Déplacements pour effectuer des achats de fournitures nécessaires à l’activité professionnelle et des achats de première nécessité dans des établissements dont les activités demeurent autorisées (liste sur gouvernement.fr)",
@@ -43,7 +66,7 @@ var motifs = {
   "interet": "missions",
 }
 
-if (undefined === getUrlVars()['prenom'] || undefined === getUrlVars()['prenom'])
+if (undefined === getUrlVars()['prenom'] || undefined === getUrlVars()['prenom'] || undefined !== getUrlVars()['heure'] || undefined !== getUrlVars()['minute'] || null === localStorage.getItem('created_at'))
   window.location.href = "/";
 
 if(undefined !== getUrlVars()['nom'] && undefined !== getUrlVars()['prenom'])
@@ -57,17 +80,15 @@ if(undefined !== getUrlVars()['ville'])
 if(undefined !== getUrlVars()['choix'])
   document.getElementById('choix').textContent = unescape(choix[decodeURI(getUrlVars()['choix'])]);
 
-let dateObj = new Date();
-let month = String(dateObj.getMonth() + 1).padStart(2, '0');
-let day = String(dateObj.getDate()).padStart(2, '0');
-let year = dateObj.getFullYear();
-
 document.getElementById('dateDuJour').textContent = day + '/' + month + '/' + year;
 
-if(undefined !== getUrlVars()['heure'] && undefined !== getUrlVars()['minute']) {
-  document.getElementById('heureDeDebut').textContent = decodeURI(getUrlVars()['heure']) + 'h' + decodeURI(getUrlVars()['minute']);
+if(null !== localStorage.getItem('heure')) {
+  //si heure dispo
+  document.getElementById('heureDeDebut').textContent = localStorage.getItem('heure');
 } else {
-  document.getElementById('heureDeDebut').textContent = dateObj.getHours() + "h" + dateObj.getMinutes();
+  //sinon on met
+  document.getElementById('heureDeDebut').textContent = String(dateObj.getHours()).padStart(2, '0') + "h" + String(dateObj.getMinutes()).padStart(2, '0');
+  localStorage.setItem('heure', ) = document.getElementById('heureDeDebut').textContent;
 }
 
 if(null !== localStorage.getItem('signature'))
@@ -75,7 +96,7 @@ if(null !== localStorage.getItem('signature'))
 
 
 var textQrCode = "";
-textQrCode += "Cree le: " + day + '/' + month + '/' + year + " a " + dateObj.getHours() + "h" + dateObj.getMinutes() + ";";
+textQrCode += "Cree le: " + localStorage.getItem('created_at') + ";";
 textQrCode += "Nom: " + unescape(decodeURI(getUrlVars()['nom'])) + ";";
 textQrCode += "Prenom: " + unescape(decodeURI(getUrlVars()['prenom'])) + ";";
 textQrCode += "Naissance: " + unescape(decodeURI(getUrlVars()['naissance'])) + " a " + unescape(decodeURI(getUrlVars()['lieu'])) + ";";
@@ -83,4 +104,11 @@ textQrCode += "Adresse: " + unescape(decodeURI(getUrlVars()['adresse'])) + ";";
 textQrCode += "Sortie: " + day + '/' + month + '/' + year + " a " + document.getElementById('heureDeDebut').textContent + ";";
 textQrCode += "Motifs: " + unescape(motifs[decodeURI(getUrlVars()['choix'])]) + ";";
 
-new QRCode(document.getElementById("qrcode"), textQrCode);
+new QRCode(document.getElementById("qrcode"), {
+	text: textQrCode,
+	width: 256,
+	height: 256,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.L
+});

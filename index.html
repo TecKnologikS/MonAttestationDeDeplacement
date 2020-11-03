@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- Pour les curieux du code (moche, je préviens) c'est par ici https://github.com/TecKnologikS/MonAttestationDeDeplacement -->
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-83384938-6"></script>
 		<script>
@@ -8,7 +9,7 @@
 		  window.dataLayer = window.dataLayer || [];
 		  function gtag(){dataLayer.push(arguments);}
 		  gtag('js', new Date());
-		  gtag('config', 'XXXXXXXXX');
+		  gtag('config', 'UA-83384938-6');
 		</script>
 		<meta charset="UTF-8">
 		<title>Mon attestation de déplacement</title>
@@ -25,13 +26,13 @@
 		</div>
 		<div class="content">
 			<div class="update">Conforme avec l'attestation mobile du 6 avril, fini le papier !</div>
-			<div class="agreement">Le site n'est pas résponsable des fausses déclarations générées .... <br />
+			<div class="agreement">Le site n'est pas responsable des fausses déclarations générées .... <br />
 				Aucune inquiétude, le site ne sauvegarde aucune donnée personnelle. <br />
-				Il est conseillé d'imprimer cette attestation, cependant si vous n'avez pas la possibilité n'oubliez pas de l'avoir sur votre smartphone, c'est mieux que rien, et c'est gratuit / écologique que demander de plus <br />
-				Et voici les <a href="https://www.google.fr/search?q=coronavirus+conseils&fbx=dothefive&hl=fr">5 GESTES "BARRIÈRE"</a> conseillé par le gouvernement.<br />
+				En cas de controle, le plus important à montrer est le QRCode généré <br />
+				Les <a href="https://www.google.fr/search?q=coronavirus+conseils&fbx=dothefive&hl=fr">5 GESTES "BARRIÈRE"</a> conseillé par le gouvernement.<br />
 				<b>Prenez soin de vous</b>
 				<br /><br />
-				Pour éditer un même formulaire mis à jour avec la date du jour, il suffira d'actualiser la page de l'attestation <br />
+				Pour mettre à jour l'attestation avec la date du jour, il suffira d'appuyer sur créer sur la page de l'attestation <br />
 
 			</div>
 			<div class="content_nom">
@@ -61,9 +62,7 @@
 			<div class="content_heure">
 				<span>Heure (optionnelle) : </span>
 				<div class="content_heure_item">
-					<input id="attestationHeure" class="field" type="text" maxlength="2" />
-					:
-					<input id="attestationMinute" class="field" type="text" maxlength="2" />
+					<input id="attestationHeure" class="field" type="time" />
 				</div>
 			</div>
 			<div class="content_heure_exp">

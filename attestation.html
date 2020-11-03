@@ -4,10 +4,16 @@
 		<meta charset="UTF-8">
 		<title>Mon attestation de déplacement provisoire</title>
 		<link href="https://fonts.googleapis.com/css?family=Roboto:100,400,900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="attestation.css" />
-		<script src="./qrcode.min.js"></script>
+		<script src="./qrcode.js"></script>
 	</head>
 	<body>
+	<div class="maj">
+		<div class="text">Nouvelle heure:</div>
+		<input id="newHour" class="field" type="time" />
+		<div class="maj_button material-icons" id="button">cached</div>
+	</div>
 	<div class="autorisation">
 		<div class="header">
 			<h1>ATTESTATION DE DÉPLACEMENT DÉROGATOIRE</h1>
