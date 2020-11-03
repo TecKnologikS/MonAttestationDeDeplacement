@@ -98,12 +98,12 @@ if(null !== localStorage.getItem('signature'))
 
 
 var textQrCode = "";
-textQrCode += "Cree le: " + localStorage.getItem('created_at') + ";";
-textQrCode += "Nom: " + unescape(decodeURI(getUrlVars()['nom'])) + ";";
-textQrCode += "Prenom: " + unescape(decodeURI(getUrlVars()['prenom'])) + ";";
-textQrCode += "Naissance: " + unescape(decodeURI(getUrlVars()['naissance'])) + " a " + unescape(decodeURI(getUrlVars()['lieu'])) + ";";
-textQrCode += "Adresse: " + unescape(decodeURI(getUrlVars()['adresse'])) + ";";
-textQrCode += "Sortie: " + day + '/' + month + '/' + year + " a " + document.getElementById('heureDeDebut').textContent + ";";
+textQrCode += "Cree le: " + localStorage.getItem('created_at') + ";\n";
+textQrCode += "Nom: " + unescape(decodeURI(getUrlVars()['nom'])) + ";\n";
+textQrCode += "Prenom: " + unescape(decodeURI(getUrlVars()['prenom'])) + ";\n";
+textQrCode += "Naissance: " + unescape(decodeURI(getUrlVars()['naissance'])) + " a " + unescape(decodeURI(getUrlVars()['lieu'])) + ";\n";
+textQrCode += "Adresse: " + unescape(decodeURI(getUrlVars()['adresse'])) + ";\n";
+textQrCode += "Sortie: " + day + '/' + month + '/' + year + " a " + document.getElementById('heureDeDebut').textContent + ";\n";
 textQrCode += "Motifs: " + unescape(motifs[decodeURI(getUrlVars()['choix'])]) + ";";
 
 new QRCode(document.getElementById("qrcode"), {
