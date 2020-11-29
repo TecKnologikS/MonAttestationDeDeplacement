@@ -5,11 +5,13 @@
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-83384938-6"></script>
 		<script>
-			<!-- suivi uniquement sur la page d accueil, ainsi aucune information saisie n est tracee -->
 		  window.dataLayer = window.dataLayer || [];
 		  function gtag(){dataLayer.push(arguments);}
 		  gtag('js', new Date());
-		  gtag('config', 'UA-83384938-6');
+          gtag('config', 'UA-83384938-6', {
+            'page_location' : location.protocol + '//' + location.host + location.pathname,
+            'page_title': 'Page attestation',
+          });
 		</script>
 		<meta charset="UTF-8">
 		<title>Mon attestation de déplacement</title>

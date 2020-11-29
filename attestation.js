@@ -28,13 +28,11 @@ function getCookie(cname) {
   return "";
 }
 
-function updateHour() {
+function updateHour(reload = false) {
   if("" !== document.getElementById('newHour').value)
     localStorage.setItem('heure', document.getElementById('newHour').value.replace(':', 'h'));
   else
     localStorage.setItem('heure', String(dateObj.getHours()).padStart(2, '0') + "h" + String(dateObj.getMinutes()).padStart(2, '0'));
-
-  localStorage.setItem('created_at', day + '/' + month + '/' + year + " a " + String(dateObj.getHours()).padStart(2, '0') + "h" + String(dateObj.getMinutes()).padStart(2, '0'));
 
   location.reload();
 }
@@ -88,8 +86,12 @@ var motifs = {
   "enfants": "enfants",
 }
 
-if (undefined === getUrlVars()['prenom'] || undefined === getUrlVars()['prenom'] || null === localStorage.getItem('created_at'))
+if (undefined === getUrlVars()['prenom'] || undefined === getUrlVars()['prenom'])
   window.location.href = "/";
+
+if (undefined !== getUrlVars()['refresh']) {
+
+}
 
 if(undefined !== getUrlVars()['nom'] && undefined !== getUrlVars()['prenom'])
   document.getElementById('nom').textContent = unescape(decodeURI(getUrlVars()['nom'])) + " " + unescape(decodeURI(getUrlVars()['prenom']));
