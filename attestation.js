@@ -28,13 +28,39 @@ function getCookie(cname) {
   return "";
 }
 
-function updateHour(reload = false) {
+function removeParam(parameter)
+{
+  var url=document.location.href;
+  var urlparts= url.split('?');
+
+  if (urlparts.length>=2)
+  {
+    var urlBase=urlparts.shift();
+    var queryString=urlparts.join("?");
+
+    var prefix = encodeURIComponent(parameter)+'=';
+    var pars = queryString.split(/[&;]/g);
+    for (var i= pars.length; i-->0;)
+      if (pars[i].lastIndexOf(prefix, 0)!==-1)
+        pars.splice(i, 1);
+    url = urlBase+'?'+pars.join('&');
+    window.history.pushState('',document.title,url); // added this line to push the new url directly to url bar .
+
+  }
+  return url;
+}
+
+function updateHour(reload = true) {
   if("" !== document.getElementById('newHour').value)
     localStorage.setItem('heure', document.getElementById('newHour').value.replace(':', 'h'));
   else
     localStorage.setItem('heure', String(dateObj.getHours()).padStart(2, '0') + "h" + String(dateObj.getMinutes()).padStart(2, '0'));
 
-  location.reload();
+  if(reload) {
+    location.reload();
+  } else {
+    removeParam('refresh');
+  }
 }
 
 document.getElementById('button').addEventListener('click', function(event) {
@@ -46,6 +72,8 @@ var correspondance = {
   "boulot": "boulot",
   "travail": "boulot",
   "course": "course",
+  "eglise": "course",
+  "culte": "course",
   "courses": "course",
   "achat": "course",
   "achats": "course",
@@ -64,10 +92,10 @@ var correspondance = {
 
 var choix = {
   "boulot": "Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un établissement d’enseignement ou de formation, déplacements professionnels ne pouvant être différés, déplacements pour un concours ou un examen.",
-  "course": "Déplacements pour effectuer des achats de fournitures nécessaires à l'activité professionnelle, des achats de première nécessité dans des établissements dont les activités demeurent autorisées, le retrait de commande et les livraisons à domicile.",
+  "course": "Déplacements pour se rendre dans un établissement culturel autorisé ou un lieu de culte ;déplacements pour effectuer des achats de biens, pour des services dont la fourniture est autorisée, pour les retraits de commandes et les livraisons à domicile",
   "medecin": "Consultations, examens et soins ne pouvant être assurés à distance et l’achat de médicaments.",
   "garde": "Déplacements pour motif familial impérieux, pour l'assistance aux personnes vulnérables et précaires ou la garde d'enfants.",
-  "sport": "Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un kilomètre autour du domicile, liés soit à l'activité physique individuelle des personnes, à l'exclusion de toute pratique sportive collective et de toute proximité avec d'autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie.",
+  "sport": "Déplacements en plein air ou vers un lieu de plein air, sans changement du lieu de résidence, dans la limite de trois heures quotidiennes et dans un rayon maximal de vingt kilomètres autour du domicile, liés soit à l’activité physique ou aux loisirs individuels, à l’exclusion de toute pratique sportive collective et de toute proximité avec d’autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie",
   "police": "Convocation judiciaire ou administrative et pour se rendre dans un service public",
   "interet": "Participation à des missions d’intérêt général sur demande de l’autorité administrative",
   "handicap": "Déplacement des personnes en situation de handicap et leur accompagnant.",
@@ -90,7 +118,7 @@ if (undefined === getUrlVars()['prenom'] || undefined === getUrlVars()['prenom']
   window.location.href = "/";
 
 if (undefined !== getUrlVars()['refresh']) {
-
+  updateHour(false);
 }
 
 if(undefined !== getUrlVars()['nom'] && undefined !== getUrlVars()['prenom'])

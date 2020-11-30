@@ -112,6 +112,7 @@ function copyLink() {
   url += '&naissance=' + encodeURI(birthdate);
   url += '&ville=' + encodeURI(document.getElementById('attestationVille').value);
   url += '&adresse=' + encodeURI(document.getElementById('attestationAdresse').value);
+  url += '&refresh=y';
   url += '&choix=' + encodeURI(document.querySelector('input[name="attestationChoix"]:checked').value);
 
   localStorage.setItem('signature', signaturePad.toDataURL('image/png'));
